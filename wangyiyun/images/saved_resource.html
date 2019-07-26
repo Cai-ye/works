@@ -1,0 +1,1393 @@
+<!DOCTYPE html>
+<!-- saved from url=(0030)https://music.163.com/discover -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<meta name="baidu_ssp_verify" content="39f14c78c537175eb4b5192c72d002c1">
+<meta name="baidu-site-verification" content="cNhJHKEzsD">
+<meta name="360-site-verification" content="e37aef53e3922913e2a6a4682e479b84">
+<meta name="sogou_site_verification" content="7zFjYjJaMq">
+<meta name="msvalidate.01" content="0CA3171633345524D8CBED5E95C75FFF">
+<meta name="google-site-verification" content="rh2irYN2Lu028orAseOD3aXd5u7Eu1mqTfhoVaw2Ihg">
+<meta name="shenma-site-verification" content="12da4afc02bfe908ed0667f287167d11_1555581349">
+<meta property="qc:admins" content="27354635321361636375">
+<meta name="robots" content="nofollow">
+<meta name="applicable-device" content="pc">
+<title>网易云音乐</title>
+<meta property="og:title" content="网易云音乐">
+<meta property="og:site_name" content="网易云音乐">
+<script type="text/javascript">
+var GDownloadLink="";
+var GDevice = "phone";
+var GFrom="";
+var GClient="";
+var GPlatform="other";
+var GRef = '';
+var GInApp = false;
+var GMobile = false;
+var GAbroad = false;
+var GUser={};
+var GAllowRejectComment = false;
+var GEnc = true;
+var GEnvType = "online";
+var GWebpSupport = "1";
+var vipWebCashierRedirect = "1"
+window.NEJ_CONF = {p_csrf:{cookie:'__csrf',param:'csrf_token'}};
+GUtil = {
+getBase:function(){
+return location.protocol+'//'+location.hostname;
+},
+getPathAndHash:function(_url){//获取URL path 之后的所有内容,并将/#/替换成/m/使之成为path的一部分
+if(!_url) return '';
+var _reg0 = /^https?:\/\/.*?\//i,
+_reg1 = /\/?#\/?/i;
+return _url.replace(_reg0,'/').replace(_reg1,'/m/');
+},
+composeRefer:function(_url,_ref){//对所有的页面请求都加上ref参数表示被嵌套的来源
+if(!_ref) return _url;
+var _hi = _url.indexOf('#'),
+_si = _url.indexOf('?');
+if(_si>0&&(_si<_hi||_hi<0)){
+return _url.substring(0,_si+1)+'ref='+_ref+'&'+_url.substring(_si+1);
+}else if(_hi>0&&(_si<0||_si>_hi)){
+return _url.substring(0,_hi)+'?ref='+_ref+_url.substring(_hi);
+}else{
+return _url+'?ref='+_ref;
+}
+}
+};(function(){
+var _ua = window.navigator.userAgent,
+_isMobile = /(mobile|mobi|wap|iphone)/i.test(_ua),
+_isAndroid = /android/i.test(_ua),
+_isIpad = /(ipad)/i.test(_ua),
+_igList = [/^\/xiami$/,/^\/live$/],//不需要以单页面打开的列表，比如某些活动页面
+_pn = location.pathname,
+_idx = _pn.lastIndexOf('/'),
+_pReg = /\s*(\w+)\s*=\s*(\d+)\s*/,
+_redirect2mobile = function() {
+var _type,_murl,
+_id = 0,
+_hash = location.hash,
+_mReg = /^#\/?m?\/(share|song|playlist|djradio|dj|program|album|mv|artist|topic|radio|zysf|drqp|qp|activity|store|user|event|video|discover\/toplist)(\/(\d+))?/,
+_base = location.protocol+'//'+location.hostname,
+_sindex = _hash.lastIndexOf('?'),
+_search = _sindex>-1?_hash.substring(_sindex+1):'',
+_match = _mReg.exec(_hash);
+// 用户等级页特殊处理
+if (_hash === '#/user/level') {
+location.href = _base + '/store/m/gain/mylevel';
+return;
+}
+// 无hash || 不匹配 || 匹配但是商品之外不带参数 || 匹配且是排行榜
+if (!_hash.length || !_match || (_match[1] != 'store' && !_search) || /share|discover\/toplist/.test(_match[1])) {
+// 有hash && (没有参数 || 排行榜)
+if ((!_search || /share|discover\/toplist/.test(_match[1])) && _hash.length) {
+location.href = _base + '/' + _hash.replace('#', 'm');
+} else {
+location.href = _base + '/m/';
+}
+return;
+}
+_type = _match[1];
+_id = _match[3];
+if (_type == 'dj') _type = 'program';
+if (_type == 'store') {
+_murl = /^#\/store\/(product|concert)\/detail/.test(_hash) ? _hash.replace('#/store', '/store/m') : '/store/m/product/index';
+} else {
+_murl = '/' + _type + '?' + (_id ? 'id=' + _id + '&' : '') + _search;
+}
+location.href = _base + _murl;
+};
+if(_isMobile || _isAndroid || _isIpad){
+_redirect2mobile();
+return;
+}
+if(!_pn||_pn=='/') return;
+for(var i in _igList){
+if(_igList[i].test(_pn)) return;
+}
+if(top==self){
+location.href = '/#'+GUtil.getPathAndHash(location.href);
+return;
+}
+//搜索引擎过来的内容页连接
+if(top==self&&/^\/static\/(song|playlist|album|artist)/i.test(_pn)){
+location.href = '/#'+_pn.substring(0,_idx).replace('/static/','/')+'?id='+_pn.substring(_idx+1);
+}
+})();
+(function(){
+var _addEvent = function(_node,_type,_cb){
+if(_node.addEventListener){
+_node.addEventListener(_type,_cb);
+}else if(_node.attachEvent){
+_node.attachEvent('on'+_type,_cb);
+}
+},
+_pathPrefixArray = [
+'/store/', // 商城
+'/m/at/', // 活动
+'/prime/m/', // 会员移动端页面
+'/oauth2/', // 授权
+'/m/oauth2/', // 授权
+'/octave/', // 新数字专辑
+'/v/', // 新数字专辑
+'/st/', // 静态页面
+'/nmusician/',// 音乐人
+'/nact/', // 新活动
+'/m/topic/', // 专栏移动端
+'/show/m/', //演出移动端
+],
+_isNotMainsitePagePath = function(_pagePath){
+// 对于非主站内的页面的跳转 需要排除
+var _path = (_pagePath||'').replace(/^https?:\/\/.*?\//i, '/').split(/[?#]/)[0];
+for(var i=0;i<_pathPrefixArray.length;i++){
+if(_path.indexOf(_pathPrefixArray[i])===0) return true;
+}
+return false;
+},
+_onAnchorClick = function(_event){//截获所有<a>标签的点击事件，自定义页面的跳转
+_event = _event||window.event;
+var _el = _event.target||_event.srcElement,
+_base = location.protocol+'//'+location.host;
+while(_el&&_el!=document){
+if(_el.tagName&&_el.tagName.toLowerCase()=='a'){
+//fix ie6下有时javascript:;不能阻止默认事件的bug.
+if(_el.href.indexOf('javascript:')>=0){
+!!_event.preventDefault
+? _event.preventDefault()
+: _event.returnValue = !1;
+return;
+}
+if(_event.button==2) return;//ff 右键会触发click事件
+//商城有独立地顶栏了，排除掉。但会员、数字专辑、单曲的商品、订单页仍保持主站frame，
+//这些url往往是通过/vip2, /payfee这样的地址跳转的，也没有问题，如果真的有，URL用#配置就好了
+if(_isNotMainsitePagePath(_el.href)) return;
+//新窗口打开的链接、云音乐单页面形式的链接、站外的链接不做拦截处理。
+if(_el.target=='_blank'
+||_el.target=='blank'
+||_isNotSameHost(_el.href)
+||_el.href==_base
+||_el.href.indexOf(_base+'/#')>=0) return;
+!!_event.preventDefault
+? _event.preventDefault()
+: _event.returnValue = !1;
+location.dispatch2(_el.href);
+break;
+}else{
+_el = _el.parentNode;
+}
+}
+},
+_isNotSameHost = function(_href){
+var _same = true;
+if(_href.charAt(0)!='/'){
+var _index = _href.indexOf('//'+location.hostname);
+if(_index > 0){
+var _index2 = _href.indexOf('?');
+if(_index2 > 0 && _index2 < _index){
+_same = false;
+}
+}else{
+_same = false;
+}
+}
+return !_same;
+};
+_addEvent(document,'click',_onAnchorClick);
+//扩展一个js中直接使用的页面跳转的方法，以拦截js中的页面跳转行为
+location.dispatch2 = function(_url,_replace){
+var delegate = false;
+try{
+delegate = !!top.GDispatcher;
+}catch(e){
+delegate = false;
+}
+// 处理对于非主站内的页面的跳转
+if(_isNotMainsitePagePath(_url)){
+if(delegate && top.location && top.location.href){
+top.location.href = _url;
+}else{
+location.href = _url;
+}
+return;
+}
+if(delegate){
+top.GDispatcher.dispatch(_url,_replace);
+}else{
+_url = GUtil.composeRefer(_url,GRef);
+//邮箱音乐盒中，每次链接的跳转都要将proxy.html的地址合并到hash中
+if(GRef&&GRef=='mail'){
+var _hindex,_sindex,
+_reg = /(https?:\/\/.+\/proxy.html)/,
+_hreg = /#(.*?)$/,
+_href = decodeURIComponent(location.href);
+if(!_reg.test(decodeURIComponent(_url))&&_reg.test(_href)){
+_hindex = _url.indexOf('#');
+_sindex = _url.lastIndexOf('?');
+if(_hindex>0){
+_url = _url+(_sindex>_hindex?'&':'?')+'proxy='+encodeURIComponent(RegExp.$1);
+}else{
+_url = _url+'#proxy='+encodeURIComponent(RegExp.$1);
+}
+}
+}
+if(_replace){
+location.replace(_url);
+}else{
+location.href = _url;
+}
+}
+};
+})();(function(){
+if(window.addEventListener){
+window.addEventListener('scroll', onScroll)
+}else{
+window.attachEvent('onscroll', onScroll)
+}
+try{
+top.scrollTopbar(0);
+}catch(e){
+}
+function onScroll(){
+try{
+top.scrollTopbar(Math.max(document.body.scrollTop, document.documentElement.scrollTop));
+}catch(e){
+//ignore
+}
+};
+})();</script>
+<!--<base href="//music.163.com/" target="_top">--><base href="." target="_top">
+<link rel="shortcut icon" href="https://s1.music.126.net/style/favicon.ico?v20180823">
+<link href="./pt_discover_index_dc4790697d0cef76e62cf98c33e78810.css" type="text/css" rel="stylesheet">
+<style>
+/* 黑胶年费 */
+.vip-annual {
+width: 43px;
+height: 16px;
+background-image: url('https://p1.music.126.net/NH967j1VbWlUv538gj7sQQ==/109951163706253365.png');
+background-size: 100% 15px;
+background-repeat: no-repeat;
+background-position: center;
+float: left;
+margin-left: 5px;
+}
+/* 黑胶vip */
+.vip-code-230 {
+width: 30px;
+height: 16px;
+background-image: url('http://p1.music.126.net/DjfcGsYjT1HqrIQk9YdV7Q==/109951163322550511.png');
+background-size: 100% 100%;
+background-repeat: no-repeat;
+background-position: center;
+float: left;
+margin-left: 5px;
+}
+/* 黑胶vip 已过期 */
+.vip-code-230-1 {
+width: 30px;
+height: 16px;
+background-image: url('http://p1.music.126.net/Ph1eQU8dh0Ag1OkNhmeNvQ==/109951163322558400.png');
+background-size: 100% 100%;
+background-repeat: no-repeat;
+background-position: center;
+float: left;
+margin-left: 5px;
+}
+/* 音乐包 */
+.vip-code-220 {
+width: 16px;
+height: 16px;
+background-image: url('http://p1.music.126.net/l81wKgnHwl3n0ayI7iVVXA==/109951163322560971.png');
+background-size: 100% 100%;
+background-repeat: no-repeat;
+background-position: center;
+float: left;
+margin-left: 5px;
+}
+/* 音乐包 已过期 */
+.vip-code-220-1 {
+width: 16px;
+height: 16px;
+background-image: url('http://p1.music.126.net/dV4HtiK1DY55xX9Z95ZR2A==/109951163322563453.png');
+background-size: 100% 100%;
+background-repeat: no-repeat;
+background-position: center;
+float: left;
+margin-left: 5px;
+}
+.vip-90 {
+max-width: 90px !important;
+float: left;
+}
+.vip-80 {
+max-width: 80px !important;
+float: left;
+}
+.vip-60 {
+max-width: 60px !important;
+float: left;
+}
+</style><script type="text/javascript" src="./vipcashier.55a4fc69829a3a06a5b9.umd.js.下载"></script><script type="text/javascript" charset="UTF-8" async="" src="./watchman.min.js.下载"></script><script type="text/javascript" charset="UTF-8" async="" src="./watchman.min.js.下载"></script></head>
+
+<body id="auto-id-NVH8UtrNkk06dwo3">
+<div data-module="discover" data-sub="discover" id="g_top" class="m-top">&nbsp;</div>
+<div id="g_nav" class="m-subnav">&nbsp;</div>
+<script>
+try{
+top.matchNav("discover", "discover");
+}catch(e){
+}
+</script>
+<div class="n-ban d-flag" id="index-banner" style="background-image:url(http://p1.music.126.net/VKvY_-9snTt_H88dHnvWBQ==/109951164218476328.jpg); background-repeat: repeat-x">
+<div class="wrap">
+<div class="ban f-pr" style="z-index:10;">
+<a hidefocus="true" class="active d-flag" href="https://music.163.com/song?id=1374061028">
+<img class="d-flag" src="./kf7c_L6sEFJvywB9QrdIhQ==_109951164218484097">
+</a>
+<a hidefocus="true" href="javascript:void(0)" class="btnl click-flag f-alpha">&lt;</a>
+<a hidefocus="true" href="javascript:void(0)" class="btnr click-flag f-alpha">&gt;</a>
+<div class="dots f-cb">
+<a hidefocus="true" href="https://music.163.com/#" class="pg click-flag pg-flag f-alpha z-slt" data-index="0"></a>
+<a hidefocus="true" href="https://music.163.com/#" class="pg click-flag pg-flag f-alpha " data-index="1"></a>
+<a hidefocus="true" href="https://music.163.com/#" class="pg click-flag pg-flag f-alpha " data-index="2"></a>
+<a hidefocus="true" href="https://music.163.com/#" class="pg click-flag pg-flag f-alpha " data-index="3"></a>
+<a hidefocus="true" href="https://music.163.com/#" class="pg click-flag pg-flag f-alpha " data-index="4"></a>
+<a hidefocus="true" href="https://music.163.com/#" class="pg click-flag pg-flag f-alpha " data-index="5"></a>
+<a hidefocus="true" href="https://music.163.com/#" class="pg click-flag pg-flag f-alpha " data-index="6"></a>
+<a hidefocus="true" href="https://music.163.com/#" class="pg click-flag pg-flag f-alpha " data-index="7"></a>
+<a hidefocus="true" href="https://music.163.com/#" class="pg click-flag pg-flag f-alpha " data-index="8"></a>
+</div>
+</div>
+<div class="download f-pr">
+<a id="side-download" href="https://music.163.com/download" class="btn" hidefocus="true" data-res-action="bilog" data-log-action="page" data-log-json="{&quot;type&quot;:&quot;downloadapp&quot;,&quot;source&quot;:&quot;banner&quot;}">下载客户端</a>
+<p>PC 安卓 iPhone WP iPad Mac 六大客户端</p>
+<span class="shadow"></span><span class="shadowr"></span>
+</div>
+</div>
+</div>
+<div id="discover-module" class="g-bd1 f-cb">
+<div class="g-mn1">
+<div class="g-mn1c">
+<div class="g-wrap3">
+<div class="n-rcmd">
+<div class="v-hd2">
+<a href="https://music.163.com/discover/playlist/" class="tit f-ff2 f-tdn">热门推荐</a>
+<div class="tab">
+<a href="https://music.163.com/discover/playlist/?cat=%E5%8D%8E%E8%AF%AD" class="s-fc3">华语</a>
+<span class="line">|</span>
+<a href="https://music.163.com/discover/playlist/?cat=%E6%B5%81%E8%A1%8C" class="s-fc3">流行</a>
+<span class="line">|</span>
+<a href="https://music.163.com/discover/playlist/?cat=%E6%91%87%E6%BB%9A" class="s-fc3">摇滚</a>
+<span class="line">|</span>
+<a href="https://music.163.com/discover/playlist/?cat=%E6%B0%91%E8%B0%A3" class="s-fc3">民谣</a>
+<span class="line">|</span>
+<a href="https://music.163.com/discover/playlist/?cat=%E7%94%B5%E5%AD%90" class="s-fc3">电子</a>
+</div>
+<span class="more"><a href="https://music.163.com/discover/playlist/" class="s-fc3">更多</a><i class="cor s-bg s-bg-6">&nbsp;</i></span>
+</div>
+<ul class="m-cvrlst f-cb">
+<li>
+<div class="u-cover u-cover-1">
+<img src="./109951164211803379.jpg">
+<a title="一首歌终将老去，但总有音乐正年轻" href="https://music.163.com/playlist?id=2863549845" class="msk" data-res-id="2863549845" data-res-type="13" data-res-action="log" data-res-data="recommendclick|0|featured|user-playlist"></a>
+<div class="bottom">
+<a class="icon-play f-fr" title="播放" href="javascript:;" data-res-type="13" data-res-id="2863549845" data-res-action="play"></a>
+<span class="icon-headset"></span>
+<span class="nb">203万</span>
+</div>
+</div>
+<p class="dec">
+<a title="一首歌终将老去，但总有音乐正年轻" class="tit s-fc0" href="https://music.163.com/playlist?id=2863549845" data-res-id="2863549845" data-res-type="13" data-res-action="log" data-res-data="recommendclick|0|featured|user-playlist">
+一首歌终将老去，但总有音乐正年轻
+</a>
+</p>
+</li>
+<li>
+<div class="u-cover u-cover-1">
+<img src="./109951163955305597.jpg">
+<a title="血月当空映 万妖齐夜行" href="https://music.163.com/playlist?id=2720845633" class="msk" data-res-id="2720845633" data-res-type="13" data-res-action="log" data-res-data="recommendclick|1|featured|user-playlist"></a>
+<div class="bottom">
+<a class="icon-play f-fr" title="播放" href="javascript:;" data-res-type="13" data-res-id="2720845633" data-res-action="play"></a>
+<span class="icon-headset"></span>
+<span class="nb">30万</span>
+</div>
+</div>
+<p class="dec">
+<a title="血月当空映 万妖齐夜行" class="tit s-fc0" href="https://music.163.com/playlist?id=2720845633" data-res-id="2720845633" data-res-type="13" data-res-action="log" data-res-data="recommendclick|1|featured|user-playlist">
+血月当空映 万妖齐夜行
+</a>
+</p>
+</li>
+<li>
+<div class="u-cover u-cover-1">
+<img src="./18999560928537533.jpg">
+<a title="朴树、许巍、李健、郑钧、老狼、赵雷、" href="https://music.163.com/playlist?id=651304456" class="msk" data-res-id="651304456" data-res-type="13" data-res-action="log" data-res-data="recommendclick|2|cityLevel_unknow|user-playlist"></a>
+<div class="bottom">
+<a class="icon-play f-fr" title="播放" href="javascript:;" data-res-type="13" data-res-id="651304456" data-res-action="play"></a>
+<span class="icon-headset"></span>
+<span class="nb">1109万</span>
+</div>
+</div>
+<p class="dec">
+<a title="朴树、许巍、李健、郑钧、老狼、赵雷、" class="tit s-fc0" href="https://music.163.com/playlist?id=651304456" data-res-id="651304456" data-res-type="13" data-res-action="log" data-res-data="recommendclick|2|cityLevel_unknow|user-playlist">
+朴树、许巍、李健、郑钧、老狼、赵雷、
+</a>
+</p>
+</li>
+<li>
+<div class="u-cover u-cover-1">
+<img src="./109951164213977065.jpg">
+<a title="想和你谈一场甜甜的恋爱" href="https://music.163.com/dj?id=2062118318" class="msk" data-res-id="2062118318" data-res-type="13" data-res-action="log" data-res-data="recommendclick|3|featured|user-playlist"></a>
+<div class="bottom">
+<a class="icon-play f-fr" title="播放" href="javascript:;" data-res-type="17" data-res-id="2062118318" data-res-action="play"></a>
+<span class="icon-headset"></span>
+<span class="nb">2653</span>
+</div>
+</div>
+<p class="dec">
+<a title="想和你谈一场甜甜的恋爱" class="tit s-fc0" href="https://music.163.com/dj?id=2062118318" data-res-id="2062118318" data-res-type="17" data-res-action="log" data-res-data="recommendclick|3|featured|user-playlist">
+<i class="u-icn u-icn-53"></i>
+想和你谈一场甜甜的恋爱
+</a>
+</p>
+</li>
+<li>
+<div class="u-cover u-cover-1">
+<img src="./109951164190722103.jpg">
+<a title="一个人熬过一些苦 才能无所不能" href="https://music.163.com/playlist?id=2869983519" class="msk" data-res-id="2869983519" data-res-type="13" data-res-action="log" data-res-data="recommendclick|4|cityLevel_unknow|user-playlist"></a>
+<div class="bottom">
+<a class="icon-play f-fr" title="播放" href="javascript:;" data-res-type="13" data-res-id="2869983519" data-res-action="play"></a>
+<span class="icon-headset"></span>
+<span class="nb">528万</span>
+</div>
+</div>
+<p class="dec">
+<a title="一个人熬过一些苦 才能无所不能" class="tit s-fc0" href="https://music.163.com/playlist?id=2869983519" data-res-id="2869983519" data-res-type="13" data-res-action="log" data-res-data="recommendclick|4|cityLevel_unknow|user-playlist">
+一个人熬过一些苦 才能无所不能
+</a>
+</p>
+</li>
+<li>
+<div class="u-cover u-cover-1">
+<img src="./109951164209462602.jpg">
+<a title="且行且珍惜" href="https://music.163.com/dj?id=2062097968" class="msk" data-res-id="2062097968" data-res-type="13" data-res-action="log" data-res-data="recommendclick|5|featured|user-playlist"></a>
+<div class="bottom">
+<a class="icon-play f-fr" title="播放" href="javascript:;" data-res-type="17" data-res-id="2062097968" data-res-action="play"></a>
+<span class="icon-headset"></span>
+<span class="nb">1304</span>
+</div>
+</div>
+<p class="dec">
+<a title="且行且珍惜" class="tit s-fc0" href="https://music.163.com/dj?id=2062097968" data-res-id="2062097968" data-res-type="17" data-res-action="log" data-res-data="recommendclick|5|featured|user-playlist">
+<i class="u-icn u-icn-53"></i>
+且行且珍惜
+</a>
+</p>
+</li>
+<li>
+<div class="u-cover u-cover-1">
+<img src="./109951164071529169.jpg">
+<a title="ᴇᴀ⁷最棒的抖腿车载收录" href="https://music.163.com/playlist?id=462106637" class="msk" data-res-id="462106637" data-res-type="13" data-res-action="log" data-res-data="recommendclick|6|cityLevel_unknow|user-playlist"></a>
+<div class="bottom">
+<a class="icon-play f-fr" title="播放" href="javascript:;" data-res-type="13" data-res-id="462106637" data-res-action="play"></a>
+<span class="icon-headset"></span>
+<span class="nb">1306万</span>
+</div>
+</div>
+<p class="dec">
+<a title="ᴇᴀ⁷最棒的抖腿车载收录" class="tit s-fc0" href="https://music.163.com/playlist?id=462106637" data-res-id="462106637" data-res-type="13" data-res-action="log" data-res-data="recommendclick|6|cityLevel_unknow|user-playlist">
+ᴇᴀ⁷最棒的抖腿车载收录
+</a>
+</p>
+</li>
+<li>
+<div class="u-cover u-cover-1">
+<img src="./109951164082360408.jpg">
+<a title="画 王巨星（cover G.E.M.邓紫棋）" href="https://music.163.com/dj?id=2062010391" class="msk" data-res-id="2062010391" data-res-type="13" data-res-action="log" data-res-data="recommendclick|7|hot_server|user-playlist"></a>
+<div class="bottom">
+<a class="icon-play f-fr" title="播放" href="javascript:;" data-res-type="17" data-res-id="2062010391" data-res-action="play"></a>
+<span class="icon-headset"></span>
+<span class="nb">428万</span>
+</div>
+</div>
+<p class="dec">
+<a title="画 王巨星（cover G.E.M.邓紫棋）" class="tit s-fc0" href="https://music.163.com/dj?id=2062010391" data-res-id="2062010391" data-res-type="17" data-res-action="log" data-res-data="recommendclick|7|hot_server|user-playlist">
+<i class="u-icn u-icn-53"></i>
+画 王巨星（cover G.E.M.邓紫棋）
+</a>
+</p>
+</li>
+</ul>
+</div>
+<div class="n-rcmd" id="personalRec"></div>
+<div id="j-music-ad" class="n-clmnad" data-has-music-ad="0">
+<div class="j-flag f-hide" id="auto-id-36SukaDCVGpFZc2E"></div>
+<div class="f-hide j-flag">
+<ins class="adsbydm" inner-prod="adbid" inner-width="689" inner-height="75" inner-src="https://iad.g.163.com/wa/ad?site=netease&amp;affiliate=music&amp;cat=homepage&amp;type=column689x75&amp;location=1" check-src="https://iad.g.163.com/wa/ad_check?site=netease&amp;affiliate=music&amp;cat=homepage&amp;type=column689x75&amp;location=1"></ins>
+</div>
+</div>
+<div class="n-new">
+<div class="v-hd2">
+<a href="https://music.163.com/discover/album/" class="tit f-ff2 f-tdn">新碟上架</a>
+<span class="more"><a href="https://music.163.com/discover/album/" class="s-fc3">更多</a><i class="cor s-bg s-bg-6">&nbsp;</i></span>
+</div>
+<div class="n-disk">
+<div class="inner" id="album-roller">
+<a hidefocus="true" href="https://music.163.com/#" class="click-flag pre s-bg s-bg-7 f-tdn">&nbsp;</a>
+<div class="roll f-pr">
+<ul class="f-cb roller-flag" style="left:-645px;">
+<li>
+<div class="u-cover u-cover-alb1">
+<img class="j-img" data-src="http://p3.music.126.net/qC1oR23TqVbb_ZlSXvYmzw==/109951164205140613.jpg?param=100y100">
+<a title="No.6 Collaborations Project" href="https://music.163.com/album?id=80316851" class="msk"></a>
+<a href="javascript:;" class="icon-play f-alpha f-fr" title="播放" data-res-type="19" data-res-id="80316851" data-res-action="play"></a>
+</div>
+<p class="f-thide"><a title="No.6 Collaborations Project" href="https://music.163.com/album?id=80316851" class="s-fc0 tit">No.6 Collaborations Project</a></p>
+<p class="tit f-thide" title="Ed Sheeran">
+<a class="s-fc3" href="https://music.163.com/artist?id=33184">Ed Sheeran</a>
+</p></li>
+<li>
+<div class="u-cover u-cover-alb1">
+<img class="j-img" data-src="http://p4.music.126.net/9u0Yh6-yefEGNTFZ4ZNjNg==/109951164208231738.jpg?param=100y100">
+<a title="bad guy (with Justin Bieber)" href="https://music.163.com/album?id=80352303" class="msk"></a>
+<a href="javascript:;" class="icon-play f-alpha f-fr" title="播放" data-res-type="19" data-res-id="80352303" data-res-action="play"></a>
+</div>
+<p class="f-thide"><a title="bad guy (with Justin Bieber)" href="https://music.163.com/album?id=80352303" class="s-fc0 tit">bad guy (with Justin Bieber)</a></p>
+<p class="tit f-thide" title="Billie Eilish / Justin Bieber">
+<a class="s-fc3" href="https://music.163.com/artist?id=11972054">Billie Eilish</a>
+&nbsp;/&nbsp;
+<a class="s-fc3" href="https://music.163.com/artist?id=35531">Justin Bieber</a>
+</p></li>
+<li>
+<div class="u-cover u-cover-alb1">
+<img class="j-img" data-src="http://p3.music.126.net/TqF_j-ueOE7ABBdaBPCz1Q==/109951164179136396.jpg?param=100y100">
+<a title="流淌的美好时光 影视原声带" href="https://music.163.com/album?id=80067034" class="msk"></a>
+<a href="javascript:;" class="icon-play f-alpha f-fr" title="播放" data-res-type="19" data-res-id="80067034" data-res-action="play"></a>
+</div>
+<p class="f-thide"><a title="流淌的美好时光 影视原声带" href="https://music.163.com/album?id=80067034" class="s-fc0 tit">流淌的美好时光 影视原声带</a></p>
+<p class="tit f-thide" title="群星">
+<a class="s-fc3" href="https://music.163.com/artist?id=122455">群星</a>
+</p></li>
+<li>
+<div class="u-cover u-cover-alb1">
+<img class="j-img" data-src="http://p3.music.126.net/qOzi5hQa9oxtn-A0YaRqUg==/109951164161475447.jpg?param=100y100">
+<a title="Joytime III" href="https://music.163.com/album?id=79904422" class="msk"></a>
+<a href="javascript:;" class="icon-play f-alpha f-fr" title="播放" data-res-type="19" data-res-id="79904422" data-res-action="play"></a>
+</div>
+<p class="f-thide"><a title="Joytime III" href="https://music.163.com/album?id=79904422" class="s-fc0 tit">Joytime III</a></p>
+<p class="tit f-thide" title="Marshmello">
+<a class="s-fc3" href="https://music.163.com/artist?id=1060019">Marshmello</a>
+</p></li>
+<li>
+<div class="u-cover u-cover-alb1">
+<img class="j-img" data-src="http://p4.music.126.net/OP4iOnJX00e_4dgPWwCeug==/109951164186397410.jpg?param=100y100">
+<a title="带着爸爸去留学 电视原声带" href="https://music.163.com/album?id=80119648" class="msk"></a>
+<a href="javascript:;" class="icon-play f-alpha f-fr" title="播放" data-res-type="19" data-res-id="80119648" data-res-action="play"></a>
+</div>
+<p class="f-thide"><a title="带着爸爸去留学 电视原声带" href="https://music.163.com/album?id=80119648" class="s-fc0 tit">带着爸爸去留学 电视原声带</a></p>
+<p class="tit f-thide" title="群星">
+<a class="s-fc3" href="https://music.163.com/artist?id=122455">群星</a>
+</p></li>
+</ul>
+<ul class="f-cb roller-flag" style="left:0px;">
+<li>
+<div class="u-cover u-cover-alb1">
+<img class="j-img" data-src="http://p4.music.126.net/mXqmc1nD5mu2S4pEvBVHzw==/109951164141857357.jpg?param=100y100">
+<a title="我们在夏枝繁茂时再见" href="https://music.163.com/album?id=79753582" class="msk"></a>
+<a href="javascript:;" class="icon-play f-alpha f-fr" title="播放" data-res-type="19" data-res-id="79753582" data-res-action="play"></a>
+</div>
+<p class="f-thide"><a title="我们在夏枝繁茂时再见" href="https://music.163.com/album?id=79753582" class="s-fc0 tit">我们在夏枝繁茂时再见</a></p>
+<p class="tit f-thide" title="钱正昊">
+<a class="s-fc3" href="https://music.163.com/artist?id=12118230">钱正昊</a>
+</p></li>
+<li>
+<div class="u-cover u-cover-alb1">
+<img class="j-img" data-src="http://p4.music.126.net/kv3niTzcfmffM2Q44nMelw==/109951164189258550.jpg?param=100y100">
+<a title="Lights / Boy With Luv" href="https://music.163.com/album?id=80164973" class="msk"></a>
+<a href="javascript:;" class="icon-play f-alpha f-fr" title="播放" data-res-type="19" data-res-id="80164973" data-res-action="play"></a>
+</div>
+<p class="f-thide"><a title="Lights / Boy With Luv" href="https://music.163.com/album?id=80164973" class="s-fc0 tit">Lights / Boy With Luv</a></p>
+<p class="tit f-thide" title="BTS (防弹少年团)">
+<a class="s-fc3" href="https://music.163.com/artist?id=783124">BTS (防弹少年团)</a>
+</p></li>
+<li>
+<div class="u-cover u-cover-alb1">
+<img class="j-img" data-src="http://p3.music.126.net/YR6liIH1VbGZye2-_0m3Pg==/109951164174488087.jpg?param=100y100">
+<a title="Uh-Oh" href="https://music.163.com/album?id=80019331" class="msk"></a>
+<a href="javascript:;" class="icon-play f-alpha f-fr" title="播放" data-res-type="19" data-res-id="80019331" data-res-action="play"></a>
+</div>
+<p class="f-thide"><a title="Uh-Oh" href="https://music.163.com/album?id=80019331" class="s-fc0 tit">Uh-Oh</a></p>
+<p class="tit f-thide" title="(G)I-DLE">
+<a class="s-fc3" href="https://music.163.com/artist?id=14055085">(G)I-DLE</a>
+</p></li>
+<li>
+<div class="u-cover u-cover-alb1">
+<img class="j-img" data-src="http://p3.music.126.net/mCoo2pFU6O8xJFdIAt36Aw==/109951164157242369.jpg?param=100y100">
+<a title="Trust Myself" href="https://music.163.com/album?id=79863843" class="msk"></a>
+<a href="javascript:;" class="icon-play f-alpha f-fr" title="播放" data-res-type="19" data-res-id="79863843" data-res-action="play"></a>
+</div>
+<p class="f-thide"><a title="Trust Myself" href="https://music.163.com/album?id=79863843" class="s-fc0 tit">Trust Myself</a></p>
+<p class="tit f-thide" title="袁娅维 / Gallant">
+<a class="s-fc3" href="https://music.163.com/artist?id=10473">袁娅维</a>
+&nbsp;/&nbsp;
+<a class="s-fc3" href="https://music.163.com/artist?id=912056">Gallant</a>
+</p></li>
+<li>
+<div class="u-cover u-cover-alb1">
+<img class="j-img" data-src="http://p4.music.126.net/dT5Xa_b16fWriJt4HHaoIA==/109951164146756014.jpg?param=100y100">
+<a title="光之海 (Live合唱版)" href="https://music.163.com/album?id=79792184" class="msk"></a>
+<a href="javascript:;" class="icon-play f-alpha f-fr" title="播放" data-res-type="19" data-res-id="79792184" data-res-action="play"></a>
+</div>
+<p class="f-thide"><a title="光之海 (Live合唱版)" href="https://music.163.com/album?id=79792184" class="s-fc0 tit">光之海 (Live合唱版)</a></p>
+<p class="tit f-thide" title="A-Lin / 王晰 / 李向哲 / 蔡尧 / 星元">
+<a class="s-fc3" href="https://music.163.com/artist?id=7063">A-Lin</a>
+&nbsp;/&nbsp;
+<a class="s-fc3" href="https://music.163.com/artist?id=1058098">王晰</a>
+&nbsp;/&nbsp;
+<a class="s-fc3" href="https://music.163.com/artist?id=32555671">李向哲</a>
+&nbsp;/&nbsp;
+<a class="s-fc3" href="https://music.163.com/artist?id=32543364">蔡尧</a>
+&nbsp;/&nbsp;
+<a class="s-fc3" href="https://music.163.com/artist?id=31831729">星元</a>
+</p></li>
+</ul>
+<ul class="f-cb roller-flag" style="left:645px;">
+<li>
+<div class="u-cover u-cover-alb1">
+<img class="j-img" data-src="http://p3.music.126.net/qC1oR23TqVbb_ZlSXvYmzw==/109951164205140613.jpg?param=100y100">
+<a title="No.6 Collaborations Project" href="https://music.163.com/album?id=80316851" class="msk"></a>
+<a href="javascript:;" class="icon-play f-alpha f-fr" title="播放" data-res-type="19" data-res-id="80316851" data-res-action="play"></a>
+</div>
+<p class="f-thide"><a title="No.6 Collaborations Project" href="https://music.163.com/album?id=80316851" class="s-fc0 tit">No.6 Collaborations Project</a></p>
+<p class="tit f-thide" title="Ed Sheeran">
+<a class="s-fc3" href="https://music.163.com/artist?id=33184">Ed Sheeran</a>
+</p></li>
+<li>
+<div class="u-cover u-cover-alb1">
+<img class="j-img" data-src="http://p4.music.126.net/9u0Yh6-yefEGNTFZ4ZNjNg==/109951164208231738.jpg?param=100y100">
+<a title="bad guy (with Justin Bieber)" href="https://music.163.com/album?id=80352303" class="msk"></a>
+<a href="javascript:;" class="icon-play f-alpha f-fr" title="播放" data-res-type="19" data-res-id="80352303" data-res-action="play"></a>
+</div>
+<p class="f-thide"><a title="bad guy (with Justin Bieber)" href="https://music.163.com/album?id=80352303" class="s-fc0 tit">bad guy (with Justin Bieber)</a></p>
+<p class="tit f-thide" title="Billie Eilish / Justin Bieber">
+<a class="s-fc3" href="https://music.163.com/artist?id=11972054">Billie Eilish</a>
+&nbsp;/&nbsp;
+<a class="s-fc3" href="https://music.163.com/artist?id=35531">Justin Bieber</a>
+</p></li>
+<li>
+<div class="u-cover u-cover-alb1">
+<img class="j-img" data-src="http://p3.music.126.net/TqF_j-ueOE7ABBdaBPCz1Q==/109951164179136396.jpg?param=100y100">
+<a title="流淌的美好时光 影视原声带" href="https://music.163.com/album?id=80067034" class="msk"></a>
+<a href="javascript:;" class="icon-play f-alpha f-fr" title="播放" data-res-type="19" data-res-id="80067034" data-res-action="play"></a>
+</div>
+<p class="f-thide"><a title="流淌的美好时光 影视原声带" href="https://music.163.com/album?id=80067034" class="s-fc0 tit">流淌的美好时光 影视原声带</a></p>
+<p class="tit f-thide" title="群星">
+<a class="s-fc3" href="https://music.163.com/artist?id=122455">群星</a>
+</p></li>
+<li>
+<div class="u-cover u-cover-alb1">
+<img class="j-img" data-src="http://p3.music.126.net/qOzi5hQa9oxtn-A0YaRqUg==/109951164161475447.jpg?param=100y100">
+<a title="Joytime III" href="https://music.163.com/album?id=79904422" class="msk"></a>
+<a href="javascript:;" class="icon-play f-alpha f-fr" title="播放" data-res-type="19" data-res-id="79904422" data-res-action="play"></a>
+</div>
+<p class="f-thide"><a title="Joytime III" href="https://music.163.com/album?id=79904422" class="s-fc0 tit">Joytime III</a></p>
+<p class="tit f-thide" title="Marshmello">
+<a class="s-fc3" href="https://music.163.com/artist?id=1060019">Marshmello</a>
+</p></li>
+<li>
+<div class="u-cover u-cover-alb1">
+<img class="j-img" data-src="http://p4.music.126.net/OP4iOnJX00e_4dgPWwCeug==/109951164186397410.jpg?param=100y100">
+<a title="带着爸爸去留学 电视原声带" href="https://music.163.com/album?id=80119648" class="msk"></a>
+<a href="javascript:;" class="icon-play f-alpha f-fr" title="播放" data-res-type="19" data-res-id="80119648" data-res-action="play"></a>
+</div>
+<p class="f-thide"><a title="带着爸爸去留学 电视原声带" href="https://music.163.com/album?id=80119648" class="s-fc0 tit">带着爸爸去留学 电视原声带</a></p>
+<p class="tit f-thide" title="群星">
+<a class="s-fc3" href="https://music.163.com/artist?id=122455">群星</a>
+</p></li>
+</ul>
+<ul class="f-cb roller-flag" style="left:1290px;">
+<li>
+<div class="u-cover u-cover-alb1">
+<img class="j-img" data-src="http://p4.music.126.net/mXqmc1nD5mu2S4pEvBVHzw==/109951164141857357.jpg?param=100y100">
+<a title="我们在夏枝繁茂时再见" href="https://music.163.com/album?id=79753582" class="msk"></a>
+<a href="javascript:;" class="icon-play f-alpha f-fr" title="播放" data-res-type="19" data-res-id="79753582" data-res-action="play"></a>
+</div>
+<p class="f-thide"><a title="我们在夏枝繁茂时再见" href="https://music.163.com/album?id=79753582" class="s-fc0 tit">我们在夏枝繁茂时再见</a></p>
+<p class="tit f-thide" title="钱正昊">
+<a class="s-fc3" href="https://music.163.com/artist?id=12118230">钱正昊</a>
+</p></li>
+<li>
+<div class="u-cover u-cover-alb1">
+<img class="j-img" data-src="http://p4.music.126.net/kv3niTzcfmffM2Q44nMelw==/109951164189258550.jpg?param=100y100">
+<a title="Lights / Boy With Luv" href="https://music.163.com/album?id=80164973" class="msk"></a>
+<a href="javascript:;" class="icon-play f-alpha f-fr" title="播放" data-res-type="19" data-res-id="80164973" data-res-action="play"></a>
+</div>
+<p class="f-thide"><a title="Lights / Boy With Luv" href="https://music.163.com/album?id=80164973" class="s-fc0 tit">Lights / Boy With Luv</a></p>
+<p class="tit f-thide" title="BTS (防弹少年团)">
+<a class="s-fc3" href="https://music.163.com/artist?id=783124">BTS (防弹少年团)</a>
+</p></li>
+<li>
+<div class="u-cover u-cover-alb1">
+<img class="j-img" data-src="http://p3.music.126.net/YR6liIH1VbGZye2-_0m3Pg==/109951164174488087.jpg?param=100y100">
+<a title="Uh-Oh" href="https://music.163.com/album?id=80019331" class="msk"></a>
+<a href="javascript:;" class="icon-play f-alpha f-fr" title="播放" data-res-type="19" data-res-id="80019331" data-res-action="play"></a>
+</div>
+<p class="f-thide"><a title="Uh-Oh" href="https://music.163.com/album?id=80019331" class="s-fc0 tit">Uh-Oh</a></p>
+<p class="tit f-thide" title="(G)I-DLE">
+<a class="s-fc3" href="https://music.163.com/artist?id=14055085">(G)I-DLE</a>
+</p></li>
+<li>
+<div class="u-cover u-cover-alb1">
+<img class="j-img" data-src="http://p3.music.126.net/mCoo2pFU6O8xJFdIAt36Aw==/109951164157242369.jpg?param=100y100">
+<a title="Trust Myself" href="https://music.163.com/album?id=79863843" class="msk"></a>
+<a href="javascript:;" class="icon-play f-alpha f-fr" title="播放" data-res-type="19" data-res-id="79863843" data-res-action="play"></a>
+</div>
+<p class="f-thide"><a title="Trust Myself" href="https://music.163.com/album?id=79863843" class="s-fc0 tit">Trust Myself</a></p>
+<p class="tit f-thide" title="袁娅维 / Gallant">
+<a class="s-fc3" href="https://music.163.com/artist?id=10473">袁娅维</a>
+&nbsp;/&nbsp;
+<a class="s-fc3" href="https://music.163.com/artist?id=912056">Gallant</a>
+</p></li>
+<li>
+<div class="u-cover u-cover-alb1">
+<img class="j-img" data-src="http://p4.music.126.net/dT5Xa_b16fWriJt4HHaoIA==/109951164146756014.jpg?param=100y100">
+<a title="光之海 (Live合唱版)" href="https://music.163.com/album?id=79792184" class="msk"></a>
+<a href="javascript:;" class="icon-play f-alpha f-fr" title="播放" data-res-type="19" data-res-id="79792184" data-res-action="play"></a>
+</div>
+<p class="f-thide"><a title="光之海 (Live合唱版)" href="https://music.163.com/album?id=79792184" class="s-fc0 tit">光之海 (Live合唱版)</a></p>
+<p class="tit f-thide" title="A-Lin / 王晰 / 李向哲 / 蔡尧 / 星元">
+<a class="s-fc3" href="https://music.163.com/artist?id=7063">A-Lin</a>
+&nbsp;/&nbsp;
+<a class="s-fc3" href="https://music.163.com/artist?id=1058098">王晰</a>
+&nbsp;/&nbsp;
+<a class="s-fc3" href="https://music.163.com/artist?id=32555671">李向哲</a>
+&nbsp;/&nbsp;
+<a class="s-fc3" href="https://music.163.com/artist?id=32543364">蔡尧</a>
+&nbsp;/&nbsp;
+<a class="s-fc3" href="https://music.163.com/artist?id=31831729">星元</a>
+</p></li>
+</ul>
+</div>
+<a hidefocus="true" href="https://music.163.com/#" class="click-flag nxt s-bg s-bg-8 f-tdn">&nbsp;</a>
+</div>
+</div>
+</div>
+<div class="n-bill">
+<div class="v-hd2">
+<a href="https://music.163.com/discover/toplist" class="tit f-ff2 f-tdn">榜单</a>
+<span class="more"><a href="https://music.163.com/discover/toplist" class="s-fc3">更多</a><i class="cor s-bg s-bg-6">&nbsp;</i></span>
+</div>
+<div class="n-bilst" id="top-flag">
+<dl class="blk ">
+<dt class="top">
+<div class="cver u-cover u-cover-4">
+<img class="j-img" data-src="http://p4.music.126.net/DrRIg6CrgDfVLEph9SNh7w==/18696095720518497.jpg?param=100y100">
+<a href="https://music.163.com/discover/toplist?id=19723756" class="msk" title="云音乐飙升榜"></a>
+</div>
+<div class="tit">
+<a href="https://music.163.com/discover/toplist?id=19723756" title="云音乐飙升榜"><h3 class="f-fs1 f-thide">云音乐飙升榜</h3></a>
+<div class="btn">
+<a href="javascript:;" class="s-bg s-bg-9 f-tdn" hidefocus="true" title="播放" data-res-type="13" data-res-id="19723756" data-res-action="play" data-res-from="31" data-res-data="19723756">播放</a>
+<a href="javascript:;" hidefocus="true" class="s-bg s-bg-10 f-tdn subscribe-flag " data-plid="19723756" title="收藏">收藏</a>
+</div>
+</div>
+</dt>
+<dd>
+<ol>
+<li onmouseover="this.className=&#39;z-hvr&#39;" onmouseout="this.className=&#39;&#39;">
+<span class="no no-top">1</span>
+<a href="https://music.163.com/song?id=1375935067" class="nm s-fc0 f-thide" title="杨花落尽子规啼">杨花落尽子规啼</a>
+<div class="oper">
+<a href="https://music.163.com/#" class="s-bg s-bg-11" title="播放" hidefocus="true" data-res-type="18" data-res-id="1375935067" data-res-action="play" data-res-from="31" data-res-data="19723756"></a>
+<a href="https://music.163.com/#" class="u-icn u-icn-81" title="添加到播放列表" hidefocus="true" data-res-type="18" data-res-id="1375935067" data-res-action="addto" data-res-from="31" data-res-data="19723756"></a>
+<a href="https://music.163.com/#" class="s-bg s-bg-12" title="收藏" hidefocus="true" data-res-level="0" data-res-fee="8" data-res-type="18" data-res-id="1375935067" data-res-action="subscribe"></a>
+</div>
+</li>
+<li onmouseover="this.className=&#39;z-hvr&#39;" onmouseout="this.className=&#39;&#39;">
+<span class="no no-top">2</span>
+<a href="https://music.163.com/song?id=1378048712" class="nm s-fc0 f-thide" title="时光不会骗我们">时光不会骗我们</a>
+<div class="oper">
+<a href="https://music.163.com/#" class="s-bg s-bg-11" title="播放" hidefocus="true" data-res-type="18" data-res-id="1378048712" data-res-action="play" data-res-from="31" data-res-data="19723756"></a>
+<a href="https://music.163.com/#" class="u-icn u-icn-81" title="添加到播放列表" hidefocus="true" data-res-type="18" data-res-id="1378048712" data-res-action="addto" data-res-from="31" data-res-data="19723756"></a>
+<a href="https://music.163.com/#" class="s-bg s-bg-12" title="收藏" hidefocus="true" data-res-level="0" data-res-fee="8" data-res-type="18" data-res-id="1378048712" data-res-action="subscribe"></a>
+</div>
+</li>
+<li onmouseover="this.className=&#39;z-hvr&#39;" onmouseout="this.className=&#39;&#39;">
+<span class="no no-top">3</span>
+<a href="https://music.163.com/song?id=1377521841" class="nm s-fc0 f-thide" title="OVERDRIVE">OVERDRIVE</a>
+<div class="oper">
+<a href="https://music.163.com/#" class="s-bg s-bg-11" title="播放" hidefocus="true" data-res-type="18" data-res-id="1377521841" data-res-action="play" data-res-from="31" data-res-data="19723756"></a>
+<a href="https://music.163.com/#" class="u-icn u-icn-81" title="添加到播放列表" hidefocus="true" data-res-type="18" data-res-id="1377521841" data-res-action="addto" data-res-from="31" data-res-data="19723756"></a>
+<a href="https://music.163.com/#" class="s-bg s-bg-12" title="收藏" hidefocus="true" data-res-level="0" data-res-fee="8" data-res-type="18" data-res-id="1377521841" data-res-action="subscribe"></a>
+</div>
+</li>
+<li onmouseover="this.className=&#39;z-hvr&#39;" onmouseout="this.className=&#39;&#39;">
+<span class="no">4</span>
+<a href="https://music.163.com/song?id=1360649595" class="nm s-fc0 f-thide" title="醉诗仙">醉诗仙</a>
+<div class="oper">
+<a href="https://music.163.com/#" class="s-bg s-bg-11" title="播放" hidefocus="true" data-res-type="18" data-res-id="1360649595" data-res-action="play" data-res-from="31" data-res-data="19723756"></a>
+<a href="https://music.163.com/#" class="u-icn u-icn-81" title="添加到播放列表" hidefocus="true" data-res-type="18" data-res-id="1360649595" data-res-action="addto" data-res-from="31" data-res-data="19723756"></a>
+<a href="https://music.163.com/#" class="s-bg s-bg-12" title="收藏" hidefocus="true" data-res-level="0" data-res-fee="0" data-res-type="18" data-res-id="1360649595" data-res-action="subscribe"></a>
+</div>
+</li>
+<li onmouseover="this.className=&#39;z-hvr&#39;" onmouseout="this.className=&#39;&#39;">
+<span class="no">5</span>
+<a href="https://music.163.com/song?id=1377148920" class="nm s-fc0 f-thide" title="人类之后">人类之后</a>
+<div class="oper">
+<a href="https://music.163.com/#" class="s-bg s-bg-11" title="播放" hidefocus="true" data-res-type="18" data-res-id="1377148920" data-res-action="play" data-res-from="31" data-res-data="19723756"></a>
+<a href="https://music.163.com/#" class="u-icn u-icn-81" title="添加到播放列表" hidefocus="true" data-res-type="18" data-res-id="1377148920" data-res-action="addto" data-res-from="31" data-res-data="19723756"></a>
+<a href="https://music.163.com/#" class="s-bg s-bg-12" title="收藏" hidefocus="true" data-res-level="0" data-res-fee="8" data-res-type="18" data-res-id="1377148920" data-res-action="subscribe"></a>
+</div>
+</li>
+<li onmouseover="this.className=&#39;z-hvr&#39;" onmouseout="this.className=&#39;&#39;">
+<span class="no">6</span>
+<a href="https://music.163.com/song?id=1377450530" class="nm s-fc0 f-thide" title="bad guy - with Justin Bieber">bad guy - with Justin Bieber</a>
+<div class="oper">
+<a href="https://music.163.com/#" class="s-bg s-bg-11" title="播放" hidefocus="true" data-res-type="18" data-res-id="1377450530" data-res-action="play" data-res-from="31" data-res-data="19723756"></a>
+<a href="https://music.163.com/#" class="u-icn u-icn-81" title="添加到播放列表" hidefocus="true" data-res-type="18" data-res-id="1377450530" data-res-action="addto" data-res-from="31" data-res-data="19723756"></a>
+<a href="https://music.163.com/#" class="s-bg s-bg-12" title="收藏" hidefocus="true" data-res-level="0" data-res-fee="8" data-res-type="18" data-res-id="1377450530" data-res-action="subscribe"></a>
+</div>
+</li>
+<li onmouseover="this.className=&#39;z-hvr&#39;" onmouseout="this.className=&#39;&#39;">
+<span class="no">7</span>
+<a href="https://music.163.com/song?id=1377145341" class="nm s-fc0 f-thide" title="单线告别">单线告别</a>
+<div class="oper">
+<a href="https://music.163.com/#" class="s-bg s-bg-11" title="播放" hidefocus="true" data-res-type="18" data-res-id="1377145341" data-res-action="play" data-res-from="31" data-res-data="19723756"></a>
+<a href="https://music.163.com/#" class="u-icn u-icn-81" title="添加到播放列表" hidefocus="true" data-res-type="18" data-res-id="1377145341" data-res-action="addto" data-res-from="31" data-res-data="19723756"></a>
+<a href="https://music.163.com/#" class="s-bg s-bg-12" title="收藏" hidefocus="true" data-res-level="0" data-res-fee="8" data-res-type="18" data-res-id="1377145341" data-res-action="subscribe"></a>
+</div>
+</li>
+<li onmouseover="this.className=&#39;z-hvr&#39;" onmouseout="this.className=&#39;&#39;">
+<span class="no">8</span>
+<a href="https://music.163.com/song?id=1374646282" class="nm s-fc0 f-thide" title="爱情小说">爱情小说</a>
+<div class="oper">
+<a href="https://music.163.com/#" class="s-bg s-bg-11" title="播放" hidefocus="true" data-res-type="18" data-res-id="1374646282" data-res-action="play" data-res-from="31" data-res-data="19723756"></a>
+<a href="https://music.163.com/#" class="u-icn u-icn-81" title="添加到播放列表" hidefocus="true" data-res-type="18" data-res-id="1374646282" data-res-action="addto" data-res-from="31" data-res-data="19723756"></a>
+<a href="https://music.163.com/#" class="s-bg s-bg-12" title="收藏" hidefocus="true" data-res-level="0" data-res-fee="8" data-res-type="18" data-res-id="1374646282" data-res-action="subscribe"></a>
+</div>
+</li>
+<li onmouseover="this.className=&#39;z-hvr&#39;" onmouseout="this.className=&#39;&#39;">
+<span class="no">9</span>
+<a href="https://music.163.com/song?id=1377372468" class="nm s-fc0 f-thide" title="鲨鱼">鲨鱼</a>
+<div class="oper">
+<a href="https://music.163.com/#" class="s-bg s-bg-11" title="播放" hidefocus="true" data-res-type="18" data-res-id="1377372468" data-res-action="play" data-res-from="31" data-res-data="19723756"></a>
+<a href="https://music.163.com/#" class="u-icn u-icn-81" title="添加到播放列表" hidefocus="true" data-res-type="18" data-res-id="1377372468" data-res-action="addto" data-res-from="31" data-res-data="19723756"></a>
+<a href="https://music.163.com/#" class="s-bg s-bg-12" title="收藏" hidefocus="true" data-res-level="0" data-res-fee="8" data-res-type="18" data-res-id="1377372468" data-res-action="subscribe"></a>
+</div>
+</li>
+<li onmouseover="this.className=&#39;z-hvr&#39;" onmouseout="this.className=&#39;&#39;">
+<span class="no">10</span>
+<a href="https://music.163.com/song?id=1377766323" class="nm s-fc0 f-thide" title="温州Freestyle">温州Freestyle</a>
+<div class="oper">
+<a href="https://music.163.com/#" class="s-bg s-bg-11" title="播放" hidefocus="true" data-res-type="18" data-res-id="1377766323" data-res-action="play" data-res-from="31" data-res-data="19723756"></a>
+<a href="https://music.163.com/#" class="u-icn u-icn-81" title="添加到播放列表" hidefocus="true" data-res-type="18" data-res-id="1377766323" data-res-action="addto" data-res-from="31" data-res-data="19723756"></a>
+<a href="https://music.163.com/#" class="s-bg s-bg-12" title="收藏" hidefocus="true" data-res-level="10" data-res-fee="1" data-res-type="18" data-res-id="1377766323" data-res-action="subscribe"></a>
+</div>
+</li>
+</ol>
+<div class="more"><a href="https://music.163.com/discover/toplist?id=19723756" class="s-fc0">查看全部&gt;</a></div>
+</dd>
+</dl>
+<dl class="blk ">
+<dt class="top">
+<div class="cver u-cover u-cover-4">
+<img class="j-img" data-src="http://p4.music.126.net/N2HO5xfYEqyQ8q6oxCw8IQ==/18713687906568048.jpg?param=100y100">
+<a href="https://music.163.com/discover/toplist?id=3779629" class="msk" title="云音乐新歌榜"></a>
+</div>
+<div class="tit">
+<a href="https://music.163.com/discover/toplist?id=3779629" title="云音乐新歌榜"><h3 class="f-fs1 f-thide">云音乐新歌榜</h3></a>
+<div class="btn">
+<a href="javascript:;" class="s-bg s-bg-9 f-tdn" hidefocus="true" title="播放" data-res-type="13" data-res-id="3779629" data-res-action="play" data-res-from="31" data-res-data="3779629">播放</a>
+<a href="javascript:;" hidefocus="true" class="s-bg s-bg-10 f-tdn subscribe-flag " data-plid="3779629" title="收藏">收藏</a>
+</div>
+</div>
+</dt>
+<dd>
+<ol>
+<li onmouseover="this.className=&#39;z-hvr&#39;" onmouseout="this.className=&#39;&#39;">
+<span class="no no-top">1</span>
+<a href="https://music.163.com/song?id=1373236574" class="nm s-fc0 f-thide" title="得不到你">得不到你</a>
+<div class="oper">
+<a href="https://music.163.com/#" class="s-bg s-bg-11" title="播放" hidefocus="true" data-res-type="18" data-res-id="1373236574" data-res-action="play" data-res-from="31" data-res-data="3779629"></a>
+<a href="https://music.163.com/#" class="u-icn u-icn-81" title="添加到播放列表" hidefocus="true" data-res-type="18" data-res-id="1373236574" data-res-action="addto" data-res-from="31" data-res-data="3779629"></a>
+<a href="https://music.163.com/#" class="s-bg s-bg-12" title="收藏" hidefocus="true" data-res-level="0" data-res-fee="8" data-res-type="18" data-res-id="1373236574" data-res-action="subscribe"></a>
+</div>
+</li>
+<li onmouseover="this.className=&#39;z-hvr&#39;" onmouseout="this.className=&#39;&#39;">
+<span class="no no-top">2</span>
+<a href="https://music.163.com/song?id=1377450530" class="nm s-fc0 f-thide" title="bad guy - with Justin Bieber">bad guy - with Justin Bieber</a>
+<div class="oper">
+<a href="https://music.163.com/#" class="s-bg s-bg-11" title="播放" hidefocus="true" data-res-type="18" data-res-id="1377450530" data-res-action="play" data-res-from="31" data-res-data="3779629"></a>
+<a href="https://music.163.com/#" class="u-icn u-icn-81" title="添加到播放列表" hidefocus="true" data-res-type="18" data-res-id="1377450530" data-res-action="addto" data-res-from="31" data-res-data="3779629"></a>
+<a href="https://music.163.com/#" class="s-bg s-bg-12" title="收藏" hidefocus="true" data-res-level="0" data-res-fee="8" data-res-type="18" data-res-id="1377450530" data-res-action="subscribe"></a>
+</div>
+</li>
+<li onmouseover="this.className=&#39;z-hvr&#39;" onmouseout="this.className=&#39;&#39;">
+<span class="no no-top">3</span>
+<a href="https://music.163.com/song?id=1374051000" class="nm s-fc0 f-thide" title="木偶人">木偶人</a>
+<div class="oper">
+<a href="https://music.163.com/#" class="s-bg s-bg-11" title="播放" hidefocus="true" data-res-type="18" data-res-id="1374051000" data-res-action="play" data-res-from="31" data-res-data="3779629"></a>
+<a href="https://music.163.com/#" class="u-icn u-icn-81" title="添加到播放列表" hidefocus="true" data-res-type="18" data-res-id="1374051000" data-res-action="addto" data-res-from="31" data-res-data="3779629"></a>
+<a href="https://music.163.com/#" class="s-bg s-bg-12" title="收藏" hidefocus="true" data-res-level="0" data-res-fee="0" data-res-type="18" data-res-id="1374051000" data-res-action="subscribe"></a>
+</div>
+</li>
+<li onmouseover="this.className=&#39;z-hvr&#39;" onmouseout="this.className=&#39;&#39;">
+<span class="no">4</span>
+<a href="https://music.163.com/song?id=1377519495" class="nm s-fc0 f-thide" title="Follow Me (Live)">Follow Me (Live)</a>
+<div class="oper">
+<a href="https://music.163.com/#" class="s-bg s-bg-11" title="播放" hidefocus="true" data-res-type="18" data-res-id="1377519495" data-res-action="play" data-res-from="31" data-res-data="3779629"></a>
+<a href="https://music.163.com/#" class="u-icn u-icn-81" title="添加到播放列表" hidefocus="true" data-res-type="18" data-res-id="1377519495" data-res-action="addto" data-res-from="31" data-res-data="3779629"></a>
+<a href="https://music.163.com/#" class="s-bg s-bg-12" title="收藏" hidefocus="true" data-res-level="0" data-res-fee="8" data-res-type="18" data-res-id="1377519495" data-res-action="subscribe"></a>
+</div>
+</li>
+<li onmouseover="this.className=&#39;z-hvr&#39;" onmouseout="this.className=&#39;&#39;">
+<span class="no">5</span>
+<a href="https://music.163.com/song?id=1376142151" class="nm s-fc0 f-thide" title="无名之辈">无名之辈</a>
+<div class="oper">
+<a href="https://music.163.com/#" class="s-bg s-bg-11" title="播放" hidefocus="true" data-res-type="18" data-res-id="1376142151" data-res-action="play" data-res-from="31" data-res-data="3779629"></a>
+<a href="https://music.163.com/#" class="u-icn u-icn-81" title="添加到播放列表" hidefocus="true" data-res-type="18" data-res-id="1376142151" data-res-action="addto" data-res-from="31" data-res-data="3779629"></a>
+<a href="https://music.163.com/#" class="s-bg s-bg-12" title="收藏" hidefocus="true" data-res-level="0" data-res-fee="8" data-res-type="18" data-res-id="1376142151" data-res-action="subscribe"></a>
+</div>
+</li>
+<li onmouseover="this.className=&#39;z-hvr&#39;" onmouseout="this.className=&#39;&#39;">
+<span class="no">6</span>
+<a href="https://music.163.com/song?id=1377556924" class="nm s-fc0 f-thide" title="酒过三巡(Cheers)">酒过三巡(Cheers)</a>
+<div class="oper">
+<a href="https://music.163.com/#" class="s-bg s-bg-11" title="播放" hidefocus="true" data-res-type="18" data-res-id="1377556924" data-res-action="play" data-res-from="31" data-res-data="3779629"></a>
+<a href="https://music.163.com/#" class="u-icn u-icn-81" title="添加到播放列表" hidefocus="true" data-res-type="18" data-res-id="1377556924" data-res-action="addto" data-res-from="31" data-res-data="3779629"></a>
+<a href="https://music.163.com/#" class="s-bg s-bg-12" title="收藏" hidefocus="true" data-res-level="0" data-res-fee="8" data-res-type="18" data-res-id="1377556924" data-res-action="subscribe"></a>
+</div>
+</li>
+<li onmouseover="this.className=&#39;z-hvr&#39;" onmouseout="this.className=&#39;&#39;">
+<span class="no">7</span>
+<a href="https://music.163.com/song?id=1377544581" class="nm s-fc0 f-thide" title="追风">追风</a>
+<div class="oper">
+<a href="https://music.163.com/#" class="s-bg s-bg-11" title="播放" hidefocus="true" data-res-type="18" data-res-id="1377544581" data-res-action="play" data-res-from="31" data-res-data="3779629"></a>
+<a href="https://music.163.com/#" class="u-icn u-icn-81" title="添加到播放列表" hidefocus="true" data-res-type="18" data-res-id="1377544581" data-res-action="addto" data-res-from="31" data-res-data="3779629"></a>
+<a href="https://music.163.com/#" class="s-bg s-bg-12" title="收藏" hidefocus="true" data-res-level="0" data-res-fee="8" data-res-type="18" data-res-id="1377544581" data-res-action="subscribe"></a>
+</div>
+</li>
+<li onmouseover="this.className=&#39;z-hvr&#39;" onmouseout="this.className=&#39;&#39;">
+<span class="no">8</span>
+<a href="https://music.163.com/song?id=1376140391" class="nm s-fc0 f-thide" title="爱不由我">爱不由我</a>
+<div class="oper">
+<a href="https://music.163.com/#" class="s-bg s-bg-11" title="播放" hidefocus="true" data-res-type="18" data-res-id="1376140391" data-res-action="play" data-res-from="31" data-res-data="3779629"></a>
+<a href="https://music.163.com/#" class="u-icn u-icn-81" title="添加到播放列表" hidefocus="true" data-res-type="18" data-res-id="1376140391" data-res-action="addto" data-res-from="31" data-res-data="3779629"></a>
+<a href="https://music.163.com/#" class="s-bg s-bg-12" title="收藏" hidefocus="true" data-res-level="0" data-res-fee="8" data-res-type="18" data-res-id="1376140391" data-res-action="subscribe"></a>
+</div>
+</li>
+<li onmouseover="this.className=&#39;z-hvr&#39;" onmouseout="this.className=&#39;&#39;">
+<span class="no">9</span>
+<a href="https://music.163.com/song?id=1372796676" class="nm s-fc0 f-thide" title="那女孩对我说 (完整版)">那女孩对我说 (完整版)</a>
+<div class="oper">
+<a href="https://music.163.com/#" class="s-bg s-bg-11" title="播放" hidefocus="true" data-res-type="18" data-res-id="1372796676" data-res-action="play" data-res-from="31" data-res-data="3779629"></a>
+<a href="https://music.163.com/#" class="u-icn u-icn-81" title="添加到播放列表" hidefocus="true" data-res-type="18" data-res-id="1372796676" data-res-action="addto" data-res-from="31" data-res-data="3779629"></a>
+<a href="https://music.163.com/#" class="s-bg s-bg-12" title="收藏" hidefocus="true" data-res-level="0" data-res-fee="8" data-res-type="18" data-res-id="1372796676" data-res-action="subscribe"></a>
+</div>
+</li>
+<li onmouseover="this.className=&#39;z-hvr&#39;" onmouseout="this.className=&#39;&#39;">
+<span class="no">10</span>
+<a href="https://music.163.com/song?id=1377131180" class="nm s-fc0 f-thide" title="给未来">给未来</a>
+<div class="oper">
+<a href="https://music.163.com/#" class="s-bg s-bg-11" title="播放" hidefocus="true" data-res-type="18" data-res-id="1377131180" data-res-action="play" data-res-from="31" data-res-data="3779629"></a>
+<a href="https://music.163.com/#" class="u-icn u-icn-81" title="添加到播放列表" hidefocus="true" data-res-type="18" data-res-id="1377131180" data-res-action="addto" data-res-from="31" data-res-data="3779629"></a>
+<a href="https://music.163.com/#" class="s-bg s-bg-12" title="收藏" hidefocus="true" data-res-level="0" data-res-fee="8" data-res-type="18" data-res-id="1377131180" data-res-action="subscribe"></a>
+</div>
+</li>
+</ol>
+<div class="more"><a href="https://music.163.com/discover/toplist?id=3779629" class="s-fc0">查看全部&gt;</a></div>
+</dd>
+</dl>
+<dl class="blk blk-1">
+<dt class="top">
+<div class="cver u-cover u-cover-4">
+<img class="j-img" data-src="http://p3.music.126.net/sBzD11nforcuh1jdLSgX7g==/18740076185638788.jpg?param=100y100">
+<a href="https://music.163.com/discover/toplist?id=2884035" class="msk" title="网易原创歌曲榜"></a>
+</div>
+<div class="tit">
+<a href="https://music.163.com/discover/toplist?id=2884035" title="网易原创歌曲榜"><h3 class="f-fs1 f-thide">网易原创歌曲榜</h3></a>
+<div class="btn">
+<a href="javascript:;" class="s-bg s-bg-9 f-tdn" hidefocus="true" title="播放" data-res-type="13" data-res-id="2884035" data-res-action="play" data-res-from="31" data-res-data="2884035">播放</a>
+<a href="javascript:;" hidefocus="true" class="s-bg s-bg-10 f-tdn subscribe-flag " data-plid="2884035" title="收藏">收藏</a>
+</div>
+</div>
+</dt>
+<dd>
+<ol>
+<li onmouseover="this.className=&#39;z-hvr&#39;" onmouseout="this.className=&#39;&#39;">
+<span class="no no-top">1</span>
+<a href="https://music.163.com/song?id=1374646027" class="nm s-fc0 f-thide" title="迷宫">迷宫</a>
+<div class="oper">
+<a href="https://music.163.com/#" class="s-bg s-bg-11" title="播放" hidefocus="true" data-res-type="18" data-res-id="1374646027" data-res-action="play" data-res-from="31" data-res-data="2884035"></a>
+<a href="https://music.163.com/#" class="u-icn u-icn-81" title="添加到播放列表" hidefocus="true" data-res-type="18" data-res-id="1374646027" data-res-action="addto" data-res-from="31" data-res-data="2884035"></a>
+<a href="https://music.163.com/#" class="s-bg s-bg-12" title="收藏" hidefocus="true" data-res-level="0" data-res-fee="8" data-res-type="18" data-res-id="1374646027" data-res-action="subscribe"></a>
+</div>
+</li>
+<li onmouseover="this.className=&#39;z-hvr&#39;" onmouseout="this.className=&#39;&#39;">
+<span class="no no-top">2</span>
+<a href="https://music.163.com/song?id=1375935067" class="nm s-fc0 f-thide" title="杨花落尽子规啼">杨花落尽子规啼</a>
+<div class="oper">
+<a href="https://music.163.com/#" class="s-bg s-bg-11" title="播放" hidefocus="true" data-res-type="18" data-res-id="1375935067" data-res-action="play" data-res-from="31" data-res-data="2884035"></a>
+<a href="https://music.163.com/#" class="u-icn u-icn-81" title="添加到播放列表" hidefocus="true" data-res-type="18" data-res-id="1375935067" data-res-action="addto" data-res-from="31" data-res-data="2884035"></a>
+<a href="https://music.163.com/#" class="s-bg s-bg-12" title="收藏" hidefocus="true" data-res-level="0" data-res-fee="8" data-res-type="18" data-res-id="1375935067" data-res-action="subscribe"></a>
+</div>
+</li>
+<li onmouseover="this.className=&#39;z-hvr&#39;" onmouseout="this.className=&#39;&#39;">
+<span class="no no-top">3</span>
+<a href="https://music.163.com/song?id=1376001732" class="nm s-fc0 f-thide" title="平行线">平行线</a>
+<div class="oper">
+<a href="https://music.163.com/#" class="s-bg s-bg-11" title="播放" hidefocus="true" data-res-type="18" data-res-id="1376001732" data-res-action="play" data-res-from="31" data-res-data="2884035"></a>
+<a href="https://music.163.com/#" class="u-icn u-icn-81" title="添加到播放列表" hidefocus="true" data-res-type="18" data-res-id="1376001732" data-res-action="addto" data-res-from="31" data-res-data="2884035"></a>
+<a href="https://music.163.com/#" class="s-bg s-bg-12" title="收藏" hidefocus="true" data-res-level="0" data-res-fee="8" data-res-type="18" data-res-id="1376001732" data-res-action="subscribe"></a>
+</div>
+</li>
+<li onmouseover="this.className=&#39;z-hvr&#39;" onmouseout="this.className=&#39;&#39;">
+<span class="no">4</span>
+<a href="https://music.163.com/song?id=1376715889" class="nm s-fc0 f-thide" title="我不会再去相信你了">我不会再去相信你了</a>
+<div class="oper">
+<a href="https://music.163.com/#" class="s-bg s-bg-11" title="播放" hidefocus="true" data-res-type="18" data-res-id="1376715889" data-res-action="play" data-res-from="31" data-res-data="2884035"></a>
+<a href="https://music.163.com/#" class="u-icn u-icn-81" title="添加到播放列表" hidefocus="true" data-res-type="18" data-res-id="1376715889" data-res-action="addto" data-res-from="31" data-res-data="2884035"></a>
+<a href="https://music.163.com/#" class="s-bg s-bg-12" title="收藏" hidefocus="true" data-res-level="0" data-res-fee="8" data-res-type="18" data-res-id="1376715889" data-res-action="subscribe"></a>
+</div>
+</li>
+<li onmouseover="this.className=&#39;z-hvr&#39;" onmouseout="this.className=&#39;&#39;">
+<span class="no">5</span>
+<a href="https://music.163.com/song?id=1376681534" class="nm s-fc0 f-thide" title="夏夏">夏夏</a>
+<div class="oper">
+<a href="https://music.163.com/#" class="s-bg s-bg-11" title="播放" hidefocus="true" data-res-type="18" data-res-id="1376681534" data-res-action="play" data-res-from="31" data-res-data="2884035"></a>
+<a href="https://music.163.com/#" class="u-icn u-icn-81" title="添加到播放列表" hidefocus="true" data-res-type="18" data-res-id="1376681534" data-res-action="addto" data-res-from="31" data-res-data="2884035"></a>
+<a href="https://music.163.com/#" class="s-bg s-bg-12" title="收藏" hidefocus="true" data-res-level="0" data-res-fee="8" data-res-type="18" data-res-id="1376681534" data-res-action="subscribe"></a>
+</div>
+</li>
+<li onmouseover="this.className=&#39;z-hvr&#39;" onmouseout="this.className=&#39;&#39;">
+<span class="no">6</span>
+<a href="https://music.163.com/song?id=1376165271" class="nm s-fc0 f-thide" title="luv letter">luv letter</a>
+<div class="oper">
+<a href="https://music.163.com/#" class="s-bg s-bg-11" title="播放" hidefocus="true" data-res-type="18" data-res-id="1376165271" data-res-action="play" data-res-from="31" data-res-data="2884035"></a>
+<a href="https://music.163.com/#" class="u-icn u-icn-81" title="添加到播放列表" hidefocus="true" data-res-type="18" data-res-id="1376165271" data-res-action="addto" data-res-from="31" data-res-data="2884035"></a>
+<a href="https://music.163.com/#" class="s-bg s-bg-12" title="收藏" hidefocus="true" data-res-level="0" data-res-fee="8" data-res-type="18" data-res-id="1376165271" data-res-action="subscribe"></a>
+</div>
+</li>
+<li onmouseover="this.className=&#39;z-hvr&#39;" onmouseout="this.className=&#39;&#39;">
+<span class="no">7</span>
+<a href="https://music.163.com/song?id=1375276696" class="nm s-fc0 f-thide" title="同窗">同窗</a>
+<div class="oper">
+<a href="https://music.163.com/#" class="s-bg s-bg-11" title="播放" hidefocus="true" data-res-type="18" data-res-id="1375276696" data-res-action="play" data-res-from="31" data-res-data="2884035"></a>
+<a href="https://music.163.com/#" class="u-icn u-icn-81" title="添加到播放列表" hidefocus="true" data-res-type="18" data-res-id="1375276696" data-res-action="addto" data-res-from="31" data-res-data="2884035"></a>
+<a href="https://music.163.com/#" class="s-bg s-bg-12" title="收藏" hidefocus="true" data-res-level="0" data-res-fee="8" data-res-type="18" data-res-id="1375276696" data-res-action="subscribe"></a>
+</div>
+</li>
+<li onmouseover="this.className=&#39;z-hvr&#39;" onmouseout="this.className=&#39;&#39;">
+<span class="no">8</span>
+<a href="https://music.163.com/song?id=1376510210" class="nm s-fc0 f-thide" title="夏日有脾气">夏日有脾气</a>
+<div class="oper">
+<a href="https://music.163.com/#" class="s-bg s-bg-11" title="播放" hidefocus="true" data-res-type="18" data-res-id="1376510210" data-res-action="play" data-res-from="31" data-res-data="2884035"></a>
+<a href="https://music.163.com/#" class="u-icn u-icn-81" title="添加到播放列表" hidefocus="true" data-res-type="18" data-res-id="1376510210" data-res-action="addto" data-res-from="31" data-res-data="2884035"></a>
+<a href="https://music.163.com/#" class="s-bg s-bg-12" title="收藏" hidefocus="true" data-res-level="0" data-res-fee="8" data-res-type="18" data-res-id="1376510210" data-res-action="subscribe"></a>
+</div>
+</li>
+<li onmouseover="this.className=&#39;z-hvr&#39;" onmouseout="this.className=&#39;&#39;">
+<span class="no">9</span>
+<a href="https://music.163.com/song?id=1375880048" class="nm s-fc0 f-thide" title="门">门</a>
+<div class="oper">
+<a href="https://music.163.com/#" class="s-bg s-bg-11" title="播放" hidefocus="true" data-res-type="18" data-res-id="1375880048" data-res-action="play" data-res-from="31" data-res-data="2884035"></a>
+<a href="https://music.163.com/#" class="u-icn u-icn-81" title="添加到播放列表" hidefocus="true" data-res-type="18" data-res-id="1375880048" data-res-action="addto" data-res-from="31" data-res-data="2884035"></a>
+<a href="https://music.163.com/#" class="s-bg s-bg-12" title="收藏" hidefocus="true" data-res-level="0" data-res-fee="8" data-res-type="18" data-res-id="1375880048" data-res-action="subscribe"></a>
+</div>
+</li>
+<li onmouseover="this.className=&#39;z-hvr&#39;" onmouseout="this.className=&#39;&#39;">
+<span class="no">10</span>
+<a href="https://music.163.com/song?id=1374781011" class="nm s-fc0 f-thide" title="城门开（Demo）">城门开（Demo）</a>
+<div class="oper">
+<a href="https://music.163.com/#" class="s-bg s-bg-11" title="播放" hidefocus="true" data-res-type="18" data-res-id="1374781011" data-res-action="play" data-res-from="31" data-res-data="2884035"></a>
+<a href="https://music.163.com/#" class="u-icn u-icn-81" title="添加到播放列表" hidefocus="true" data-res-type="18" data-res-id="1374781011" data-res-action="addto" data-res-from="31" data-res-data="2884035"></a>
+<a href="https://music.163.com/#" class="s-bg s-bg-12" title="收藏" hidefocus="true" data-res-level="0" data-res-fee="8" data-res-type="18" data-res-id="1374781011" data-res-action="subscribe"></a>
+</div>
+</li>
+</ol>
+<div class="more"><a href="https://music.163.com/discover/toplist?id=2884035" class="s-fc0">查看全部&gt;</a></div>
+</dd>
+</dl>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="g-sd1">
+<div class="n-myinfo n-myinfo-1 s-bg s-bg-1">
+<p class="note s-fc3">登录网易云音乐，可以享受无限收藏的乐趣，并且无限同步到手机</p>
+<a id="index-enter-default" href="https://music.163.com/#" onclick="top.login();return false;" class="btn s-bg s-bg-2 f-tdn" tabindex="1">用户登录</a>
+</div>
+<div class="n-singer">
+<h3 class="v-hd3">
+<span class="f-fl">入驻歌手</span>
+<a href="https://music.163.com/discover/artist/signed/" class="more s-fc3">查看全部 &gt;</a>
+</h3>
+<ul class="n-enter f-cb" id="singer-list">
+<li>
+<a href="https://music.163.com/user/home?id=29879272" class="itm f-tdn">
+<div class="head"><img class="j-img" src="./5931865232210340.jpg"></div>
+<div class="ifo">
+<h4><span class="nm f-fs1 f-ib f-thide">张惠妹aMEI</span></h4>
+<p class="f-thide s-fc3">台湾歌手张惠妹</p>
+</div>
+</a>
+</li>
+<li>
+<a href="https://music.163.com/user/home?id=100167517" class="itm f-tdn">
+<div class="head"><img class="j-img" src="./3302932937408956.jpg"></div>
+<div class="ifo">
+<h4><span class="nm f-fs1 f-ib f-thide">Fine乐团</span></h4>
+<p class="f-thide s-fc3">独立音乐人</p>
+</div>
+</a>
+</li>
+<li>
+<a href="https://music.163.com/user/home?id=58426904" class="itm f-tdn">
+<div class="head"><img class="j-img" src="./19027048718765608.jpg"></div>
+<div class="ifo">
+<h4><span class="nm f-fs1 f-ib f-thide">萬曉利</span></h4>
+<p class="f-thide s-fc3">民谣歌手、中国现代民谣的代表人物之一</p>
+</div>
+</a>
+</li>
+<li>
+<a href="https://music.163.com/user/home?id=93504818" class="itm f-tdn">
+<div class="head"><img class="j-img" src="./7943971513291094.jpg"></div>
+<div class="ifo">
+<h4><span class="nm f-fs1 f-ib f-thide">音乐人赵雷</span></h4>
+<p class="f-thide s-fc3">民谣歌手</p>
+</div>
+</a>
+</li>
+<li>
+<a href="https://music.163.com/user/home?id=46998208" class="itm f-tdn">
+<div class="head"><img class="j-img" src="./109951163892302996.jpg"></div>
+<div class="ifo">
+<h4><span class="nm f-fs1 f-ib f-thide">王三溥</span></h4>
+<p class="f-thide s-fc3">音乐人</p>
+</div>
+</a>
+</li>
+</ul>
+<div><a target="_blank" href="https://music.163.com/recruit" hidefocus="true" class="u-btn2 u-btn2-1"><i>申请成为网易音乐人</i></a></div>
+</div>
+<div class="n-dj n-dj-1">
+<h3 class="v-hd3">热门主播</h3>
+<ul class="n-hotdj f-cb" id="hotdj-list">
+<li>
+<a href="https://music.163.com/user/home?id=278438485" class="cver"><img class="j-img" src="./default_avatar_40.jpg" data-src="http://p2.music.126.net/H3QxWdf0eUiwmhJvA4vrMQ==/1407374893913311.jpg?param=40y40"></a>
+<div class="info">
+<p><a href="https://music.163.com/user/home?id=278438485" class="nm-icn f-thide s-fc0">陈立</a> <sup class="u-icn u-icn-1 "></sup>
+</p>
+<p class="f-thide s-fc3">心理学家、美食家陈立教授</p>
+</div>
+</li>
+<li>
+<a href="https://music.163.com/user/home?id=91239965" class="cver"><img class="j-img" src="./default_avatar_40.jpg" data-src="http://p2.music.126.net/y5-sM7tjnxnu_V9LWKgZlw==/7942872001461517.jpg?param=40y40"></a>
+<div class="info">
+<p><a href="https://music.163.com/user/home?id=91239965" class="nm-icn f-thide s-fc0">DJ艳秋</a> <sup class="u-icn u-icn-1 "></sup>
+</p>
+<p class="f-thide s-fc3">著名音乐节目主持人</p>
+</div>
+</li>
+<li>
+<a href="https://music.163.com/user/home?id=324314596" class="cver"><img class="j-img" src="./default_avatar_40.jpg" data-src="http://p2.music.126.net/6cc6lgOfQTo6ovNnTHPyJg==/3427177769086282.jpg?param=40y40"></a>
+<div class="info">
+<p><a href="https://music.163.com/user/home?id=324314596" class="nm-icn f-thide s-fc0">国家大剧院古典音乐频道</a> <sup class="u-icn u-icn-1 "></sup>
+</p>
+<p class="f-thide s-fc3">国家大剧院古典音乐官方</p>
+</div>
+</li>
+<li>
+<a href="https://music.163.com/user/home?id=1611157" class="cver"><img class="j-img" src="./default_avatar_40.jpg" data-src="http://p2.music.126.net/xa1Uxrrn4J0pm_PJwkGYvw==/3130309604335651.jpg?param=40y40"></a>
+<div class="info">
+<p><a href="https://music.163.com/user/home?id=1611157" class="nm-icn f-thide s-fc0">谢谢收听</a> <sup class="u-icn u-icn-1 "></sup>
+</p>
+<p class="f-thide s-fc3">南京电台主持人王馨</p>
+</div>
+</li>
+<li>
+<a href="https://music.163.com/user/home?id=2313954" class="cver"><img class="j-img" src="./default_avatar_40.jpg" data-src="http://p2.music.126.net/slpd09Tf5Ju82Mv-h8MP4w==/3440371884651965.jpg?param=40y40"></a>
+<div class="info">
+<p><a href="https://music.163.com/user/home?id=2313954" class="nm-icn f-thide s-fc0">DJ晓苏</a> <sup class="u-icn u-icn-1 "></sup>
+</p>
+<p class="f-thide s-fc3">独立DJ，CRI环球旅游广播特邀DJ</p>
+</div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+
+<div class="g-ft ">
+<div class="m-ft">
+<div class="wrap f-cb">
+<div class="copy">
+<p class="link" id="music-link">
+<a href="https://music.163.com/html/web2/service.html" target="_blank" class="item s-fc4">服务条款</a><span class="line">|</span>
+<a href="https://music.163.com/html/web2/privacy.html" target="_blank" class="item s-fc4">隐私政策</a><span class="line">|</span>
+<a href="https://music.163.com/st/staticdeal/complaints.html" target="_blank" class="item s-fc4">版权投诉指引</a><span class="line">|</span>
+<a id="g_feedback" href="https://music.163.com/#" class="item s-fc4" onclick="nm.x.feedback();return false;" hidefocus="true">意见反馈</a>
+<span class="line">|</span><a class="s-fc4"></a></p>
+<p class="right s-fc3">
+<span class="sep span">网易公司版权所有©1997-2019</span><span class="span">杭州乐读科技有限公司运营：</span><a href="http://p1.music.126.net/03WF0APmm-J0TqdbOc8-XQ==/109951163649544962.png" target="_blank" class="alink s-fc3">浙网文[2018]3506-263号</a>
+</p>
+<p class="contact s-fc3">
+<span class="sep span">违法和不良信息举报电话：0571-89853516</span>
+<span class="span">举报邮箱：</span><a class="alink" href="mailto:ncm5990@163.com">ncm5990@163.com</a>
+</p>
+</div>
+<ul class="enter f-fr">
+<li class="unit">
+<a class="logo logonew logo-auth f-tid" href="https://music.163.com/st/userbasic#/auth" target="_blank"></a>
+<span class="tt tt-auth"></span>
+</li>
+<li class="unit">
+<a class="logo logonew logo-musician f-tid" href="https://music.163.com/recruit" target="_blank"></a>
+<span class="tt tt-musician"></span>
+</li>
+<li class="unit">
+<a class="logo logonew logo-reward f-tid" href="https://music.163.com/web/reward" target="_blank"></a>
+<span class="tt tt-reward"></span>
+</li>
+<li class="unit">
+<a class="logo logonew logo-cash f-tid" href="https://music.163.com/uservideo#/plan" target="_blank"></a>
+<span class="tt tt-cash"></span>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<script>
+var imgconfig = ""
+var links = document.getElementById("music-link");
+document.getElementById("g_feedback").className="item s-fc4";
+var itemlink = document.createElement("a");
+itemlink.className="s-fc4";
+itemlink.innerHTML="";
+itemlink.onclick=function() {
+var path = "https://st.qa.igame.163.com";
+if (window.location.href.indexOf("music.163.com") > -1) {
+path = "https://st.music.163.com";
+}
+window.open(path+"/itempage/item.html?img="+encodeURIComponent(imgconfig));
+}
+var span = document.createElement("span");
+span.className="line";
+span.innerHTML="|";
+links.append(span);
+links.append(itemlink);
+</script>
+<a title="回到顶部" class="m-back" href="https://music.163.com/#" id="g_backtop" hidefocus="true" style="display:none;">回到顶部</a>
+<script type="text/javascript">
+window.Gbanners =
+[
+{
+picUrl : "http://p1.music.126.net/kf7c_L6sEFJvywB9QrdIhQ==/109951164218484097.jpg",
+url : "/song?id=1374061028",
+targetId : "1374061028",
+backgroundUrl : "http://p1.music.126.net/VKvY_-9snTt_H88dHnvWBQ==/109951164218476328.jpg",
+targetType : "1",
+monitorType: "",
+monitorImpress: "",
+monitorClick: ""
+},
+{
+picUrl : "http://p1.music.126.net/2GnNl_XxJJ4JSzerdSUcQQ==/109951164218455222.jpg",
+url : "/song?id=1365233944",
+targetId : "1365233944",
+backgroundUrl : "http://p1.music.126.net/xrOGPtZttea9XlMD3UhVEg==/109951164218449882.jpg",
+targetType : "1",
+monitorType: "",
+monitorImpress: "",
+monitorClick: ""
+},
+{
+picUrl : "http://p1.music.126.net/QxNCCn6tKxuyDk58BMXCAg==/109951164218523465.jpg",
+url : "/song?id=1378241458",
+targetId : "1378241458",
+backgroundUrl : "http://p1.music.126.net/g0DKNra2qDyVzyLHGmXqYw==/109951164218525873.jpg",
+targetType : "1",
+monitorType: "",
+monitorImpress: "",
+monitorClick: ""
+},
+{
+picUrl : "http://p1.music.126.net/f5KCVtAf1JOgKMtgPQZy4A==/109951164218427420.jpg",
+url : "/song?id=1378207031",
+targetId : "1378207031",
+backgroundUrl : "http://p1.music.126.net/ZsroS5qBm2AiIBZLrfDnhw==/109951164218430393.jpg",
+targetType : "1",
+monitorType: "",
+monitorImpress: "",
+monitorClick: ""
+},
+{
+picUrl : "http://p1.music.126.net/Pird7YsZz4JILX9LsQOj0w==/109951164219809576.jpg",
+url : "/album?id=79880626",
+targetId : "79880626",
+backgroundUrl : "http://p1.music.126.net/ZVmQ4-tkRd90Yx9wVbVyvQ==/109951164219803826.jpg",
+targetType : "10",
+monitorType: "",
+monitorImpress: "",
+monitorClick: ""
+},
+{
+picUrl : "http://p1.music.126.net/P9B4U8axSNun5niBEcgi5A==/109951164219305339.jpg",
+url : "/song?id=1378273266",
+targetId : "1378273266",
+backgroundUrl : "http://p1.music.126.net/jZ8d2p3WX_fNCoCForNoBw==/109951164219310597.jpg",
+targetType : "1",
+monitorType: "",
+monitorImpress: "",
+monitorClick: ""
+},
+{
+picUrl : "http://p1.music.126.net/XyOsH9i6nO3tyiV4xzTzEA==/109951164218412778.jpg",
+url : "/topic?id=43360727",
+targetId : "43360727",
+backgroundUrl : "http://p1.music.126.net/gVICeZvhgmJnqGZH06717w==/109951164218416677.jpg",
+targetType : "1005",
+monitorType: "",
+monitorImpress: "",
+monitorClick: ""
+},
+{
+picUrl : "http://p1.music.126.net/vyVUR6VCIk46nyPGBIn7Kw==/109951164219949952.jpg",
+url : "/album?id=80418297",
+targetId : "80418297",
+backgroundUrl : "http://p1.music.126.net/sEHFufhqqYkkuO0HaU9EiQ==/109951164219958633.jpg",
+targetType : "10",
+monitorType: "",
+monitorImpress: "",
+monitorClick: ""
+},
+{
+picUrl : "http://p1.music.126.net/a2BMpGSpgJAiNZByLQC3Mg==/109951164219312986.jpg",
+url : "/song?id=1377450530",
+targetId : "1377450530",
+backgroundUrl : "http://p1.music.126.net/qNgDZ5bRfLg7cyE6B2oRQQ==/109951164219320180.jpg",
+targetType : "1",
+monitorType: "",
+monitorImpress: "",
+monitorClick: ""
+}
+];
+</script>
+<script src="./core_cfc838a13fd05bc1c5aba83e06a5776c.js.下载" type="text/javascript"></script><iframe frameborder="0" id="auto-id-0mvnP7wlbPm9TbAk" style="display: none;" src="./saved_resource(2).html"></iframe><script type="text/javascript" src="./tool.min.js.下载"></script><script src="./pt_discover_index_da4fa4b920a7e7c0d6ab51ad66c0756a.js.下载" type="text/javascript"></script><script type="text/javascript" src="./tool.min.js.下载"></script><script src="./ad_check" id="j-script-ad" type="text/javascript"></script>
+<script defer="defer" src="./ntes-ad-cloud.min.js.下载"></script>
+
+<script type="text/javascript">
+var _gaq=_gaq||[];
+_gaq.push(['_setAccount','UA-38766552-1'],['_setLocalGifPath','/UA-38766552-1/__utm.gif'],['_setLocalRemoteServerMode']);
+_gaq.push(['_trackPageview']);
+//fix ipad下的一个bug
+if (navigator.userAgent.indexOf('iPad') != -1) {
+iframeHeight = Math.max(
+Math.max(document.body.scrollHeight, document.documentElement.scrollHeight),
+Math.max(document.body.offsetHeight, document.documentElement.offsetHeight),
+Math.max(document.body.clientHeight, document.documentElement.clientHeight)
+);
+top.document.body.style.height = iframeHeight + 20 + 'px';
+}</script>
+<div><div></div></div></body></html>

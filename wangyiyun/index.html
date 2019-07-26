@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>网易云</title>
+	<link rel="stylesheet" href="./css/base.css">
+	<link rel="stylesheet" href="./css/index.css">
+	<script src="./js/base.js"></script>
+	<script src="./js/index.js"></script>
+</head>
+<body>
+    <!-- 导航栏 -->
+    <div class="bar" id="bar">
+    		<div class="bar-top">
+    			<div class="w">
+					<div class="icon"></div>
+					<ul class="bar-choose">
+						<i></i>
+						<li><a href="#">发现音乐</a></li>
+						<li><a href="#">我的音乐</a></li>
+						<li><a href="#">朋友</a></li>
+						<li><a href="#">商城</a></li>
+						<li><a href="#">音乐人</a></li>
+						<li><a href="#">下载客户端</a></li>
+						<span></span>
+					</ul>
+					<div class="bar-load">
+						    <span></span>
+							<a href="#">登录</a>
+							<ul class="loadway" >
+								<li><span></span><i class="i1"></i>手机号登录</li>
+								<li><i class="i2"></i>微信登录</li>
+								<li><i class="i3"></i>QQ登录</li>
+								<li><i class="i4"></i>新浪微博登录</li>
+								<li><i class="i5"></i>网易邮箱账号登录</li>
+							</ul>
+					</div>
+					<div class="bar-center"><a href="#">创作者中心</a></div>
+					<div class="bar-search">
+						<span></span>
+						<input type="text" placeholder="音乐/视频/电台/用户">
+					</div>	
+				</div>
+			</div>
+			<div class="bar-bot">
+					<div class="w">
+						<ul class='bar-bot-choo'>
+							<li><a href="#">推荐</a></li>
+							<li><a href="#">排行榜</a></li>
+							<li><a href="#">歌单</a></li>
+							<li><a href="#">主播电台</a></li>
+							<li><a href="#">歌手</a></li>
+							<li><a href="#">新碟上架</a></li>
+						</ul>
+					</div>
+			</div>
+			<div class="bar-red"></div>
+	</div>
+	<iframe src="./findmusic.html" frameborder="0" width=100% height="1739px"></iframe>
+
+	<!-- 底部 -->
+	<div class="foot">
+			<div class="f-center">
+				<div class="foot-left fl">
+					<p class="p1">
+						<a href="#">服务条款</a><span>|</span>
+						<a href="#">隐私政策</a><span>|</span>
+						<a href="#">版权投诉指引</a><span>|</span>
+						<a href="#">意见反馈</a><span>|</span>
+					</p>
+					<p>
+						<span class="p2-1">网易公司版权所有©1997-2019</span>
+						<span>杭州乐读科技有限公司运营：</span>
+						<a href="#">浙网文[2018]3506-263号</a>
+					</p>
+					<p>
+						<span class="p2-1">违法和不良信息举报电话：0571-89853516</span>
+						<span>举报邮箱：</span>
+						<a href="#">ncm5990@163.com</a> </p>
+				</div>
+				<div class="foot-right fr">
+					<ul>
+						<li><a href="#"></a><span>用户认证</span></li>
+						<li><a href="#"></a><span>独立音乐人</span></li>
+						<li><a href="#"></a><span>赞赏</span></li>
+						<li><a href="#"></a><span>视频奖励</span></li>
+					</ul>
+				</div>
+			</div>
+	</div>
+	
+	<!-- 音乐播放器 -->
+	<div class="musicbar">
+        <div class="musicbar-center">
+           <audio src="./music/1.mp3" id="audio"></audio>
+           <div class="bofang-icon">
+               <a href="javascript:;" class="prev"></a>
+               <a href="javascript:;" class="startBtn"></a>
+               <a href="javascript:;" class="next"></a>
+           </div>
+           <div class="music-img">
+               <img src="./images/barmusic.jpg" alt="">
+               <a href="javascript:;"></a>
+           </div>
+           <div class="play">
+               <div class="song-inf">
+                   <a href="javascript:;" class="name ">你会爱上我吗</a>
+                   <span ><a href="javascript:;">曾雪雅</a>/<a href="javascript:;">大偶</a></span>
+                   <a href="javascript:;" class="link"></a>
+               </div>
+               <div class="playitem">
+                    
+                    <!-- 进度条   -->
+                    <div class="progress">
+                        <div class="curr-progress">
+                            <!-- 开关 -->
+                            <span class="switch"></span>
+                        </div>
+                    </div>
+                    <!-- 时间 -->
+                    <div class="audioTime">
+                        <span class="curr-time">00:00</span>/<span class="total-time">00:00</span>
+                    </div>
+               </div>
+           </div>
+           <div class="download-icon">
+               <a href="javascript:;" class="down"></a>
+               <a href="javascript:;" class="share"></a>
+           </div>
+           <div class="adjust">
+                <a href="javascript:;" class="voice"></a>
+                <a href="javascript:;" class="mode"></a>
+           </div>
+           <div class="circle-list">
+               <a href="javascript:;" class="list"><i>&nbsp&nbsp</i>20</a>
+            </div>
+        </div>
+    </div>
+
+	<a href="#bar" class='jump' title="回到顶部" ></a>
+</body>
+
+</html>
